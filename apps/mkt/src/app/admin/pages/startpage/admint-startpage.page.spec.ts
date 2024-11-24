@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AdminStartpagePage } from './admint-startpage.page';
+import { AdminStartpagePage } from '../admint-startpage.page';
 
 describe('AdminStartpagePage', () => {
   let component: AdminStartpagePage;
