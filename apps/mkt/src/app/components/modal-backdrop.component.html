@@ -1,0 +1,11 @@
+<div
+  class="z-[10000] fixed h-screen w-screen top-0 bg-gray-800 bg-opacity-50 dark:bg-gray-400 dark:bg-opacity-50 flex justify-center items-center"
+  role="button"
+  tabindex="-1"
+  (keypress)="close()"
+  (click)="close()"
+>
+  <app-modal-wrapper (click)="$event.stopPropagation()" (keypress)="close()">
+    <ng-template #modalContainer />
+  </app-modal-wrapper>
+</div>
