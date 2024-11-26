@@ -33,4 +33,8 @@ export class ModalBackdropComponent implements AfterViewInit {
   close() {
     this.modalService.close();
   }
+
+  keypress(event: KeyboardEvent) {
+    //todo: mal schauen
+  }
 }

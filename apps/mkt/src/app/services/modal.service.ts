@@ -49,16 +49,9 @@ export class ModalService {
     this._backdropComponentRef = this.attachBackdrop(containerElement);
     this._modalComponentRef = this.createModalComponent(component);
 
-    console.log('this._modalComponentRef', this._modalComponentRef);
-
     this._backdropComponentRef.setInput(
       'modalComponentRef',
       this._modalComponentRef
-    );
-
-    console.log(
-      'this._backdropComponentRef.instance.modalComponentRef',
-      this._backdropComponentRef.instance.modalComponentRef
     );
   }
 
@@ -79,9 +72,8 @@ export class ModalService {
   createModalComponent(modalComponent: ComponentType<unknown>) {
     const modalComponentRef = createComponent(modalComponent, {
       environmentInjector: this._applicationRef.injector,
+      elementInjector: this._injector,
     });
-
-    this._applicationRef.attachView(modalComponentRef.hostView);
 
     this.isModalVisible = true;
 
