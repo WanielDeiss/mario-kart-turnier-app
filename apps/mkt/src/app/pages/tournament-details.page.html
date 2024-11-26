@@ -1,0 +1,27 @@
+<section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-16">
+  <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+    @if(selectedTournamentStore.isLoading()) {
+    <div class="flex items-center justify-center w-full h-56">
+      <div
+        class="px-3 py-1 text-lg font-medium leading-none text-center text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200"
+      >
+        loading...
+      </div>
+    </div>
+    } @else {
+    <div class="sm:flex sm:items-center sm:justify-between sm:gap-4">
+      <p
+        class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl"
+      >
+        {{ selectedTournamentStore.selectedTournament()?.name}}
+      </p>
+      <button
+        class="flex items-center justify-center text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800"
+        (click)="openRegistrationModal(selectedTournamentStore.selectedTournament()?.id!)"
+      >
+        Register for tournament
+      </button>
+    </div>
+    }
+  </div>
+</section>

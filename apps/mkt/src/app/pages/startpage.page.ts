@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TournamentStore } from '../store/tournaments.store';
 
 @Component({
   selector: 'app-startpage',
@@ -8,4 +9,6 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   templateUrl: './startpage.page.html',
 })
-export class StartpagePage {}
+export class StartpagePage {
+  public readonly store = inject(TournamentStore);
+}

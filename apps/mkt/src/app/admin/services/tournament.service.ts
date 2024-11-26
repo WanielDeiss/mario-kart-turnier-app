@@ -16,6 +16,12 @@ export class TournamentService {
     );
   }
 
+  get(id: number) {
+    return lastValueFrom(
+      this.httpClient.get<TournamentResponse>(API_ROUTES.get.tournament(id))
+    );
+  }
+
   addTournament(tournament: Tournament) {
     return lastValueFrom(
       this.httpClient.post<TournamentResponse>(

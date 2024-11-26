@@ -24,11 +24,21 @@ export class TournamentController {
 
   @Get(':id')
   async getTournament(@Param('id') id: string): Promise<TournamentModel> {
+    console.log('id', id);
     return this.tournamentService.tournament({ id: parseInt(id) });
   }
 
   @Delete(':id')
   async deleteTournament(@Param('id') id: string): Promise<TournamentModel> {
     return this.tournamentService.deleteTournament({ id: parseInt(id) });
+  }
+
+  @Post(':id/participant')
+  async addParticipant(
+    @Param('id') id: string,
+    @Body() postData: { name: string }
+  ): Promise<TournamentModel> {
+    const { name } = postData;
+    return; // todo add participant to tournament
   }
 }
