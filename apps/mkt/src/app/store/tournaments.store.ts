@@ -8,7 +8,7 @@ import {
 } from '@ngrx/signals';
 import { Tournament, TournamentResponse } from './tournament.model';
 import { computed, inject } from '@angular/core';
-import { TournamentService } from '../services/tournament.service';
+import { TournamentService } from '../admin/services/tournament.service';
 
 type TournamentState = {
   tournaments: TournamentResponse[];

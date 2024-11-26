@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import API_ROUTES from '../admin-api.routes';
-import { Tournament, TournamentResponse } from '../store/tournament.model';
+import { Tournament, TournamentResponse } from '../../store/tournament.model';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable({

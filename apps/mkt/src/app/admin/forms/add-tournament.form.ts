@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TournamentService } from '../services/tournament.service';
-import { Tournament } from '../store/tournament.model';
-import { TournamentStore } from '../store/tournaments.store';
+import { Tournament } from '../../store/tournament.model';
+import { TournamentStore } from '../../store/tournaments.store';
 import { ModalService } from '../../services/modal.service';
 
 @Component({

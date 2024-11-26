@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TournamentStore } from '../../store/tournaments.store';
+import { TournamentStore } from '../../../store/tournaments.store';
 import { ModalService } from '../../../services/modal.service';
 import { AddTournamentForm } from '../../forms/add-tournament.form';
 
