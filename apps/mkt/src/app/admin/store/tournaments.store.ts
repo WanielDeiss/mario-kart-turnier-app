@@ -47,12 +47,18 @@ export const TournamentStore = signalStore(
       async addTournament(tournament: Tournament) {
         patchState(store, (state) => ({ isLoading: true }));
         const newTournament = await tournamentService.addTournament(tournament);
-        console.log('newTournament', newTournament);
         patchState(store, (state) => ({
           tournaments: [...state.tournaments, newTournament],
           isLoading: false,
         }));
-        console.log('store.tournaments()', store.tournaments());
+      },
+      async deleteTournament(id: number) {
+        patchState(store, (state) => ({ isLoading: true }));
+        await tournamentService.deleteTournament(id);
+        patchState(store, (state) => ({
+          tournaments: state.tournaments.filter((t) => t.id !== id),
+          isLoading: false,
+        }));
       },
       updateQuery(query: string): void {
         // 👇 Updating state using the `patchState` function.

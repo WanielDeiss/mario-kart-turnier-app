@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { Tournament as TournamentModel } from '@prisma/client';
 import { TournamentService } from './service/tournament.service';
 
@@ -23,7 +23,12 @@ export class TournamentController {
   }
 
   @Get(':id')
-  async getTournament(@Param() id: string): Promise<TournamentModel> {
+  async getTournament(@Param('id') id: string): Promise<TournamentModel> {
     return this.tournamentService.tournament({ id: parseInt(id) });
+  }
+
+  @Delete(':id')
+  async deleteTournament(@Param('id') id: string): Promise<TournamentModel> {
+    return this.tournamentService.deleteTournament({ id: parseInt(id) });
   }
 }

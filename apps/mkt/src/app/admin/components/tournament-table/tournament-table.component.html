@@ -82,8 +82,7 @@
                 </button>
                 <button
                   type="button"
-                  data-modal-target="deleteModal"
-                  data-modal-toggle="deleteModal"
+                  (click)="deleteTournament(tournament.id)"
                   class="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400"
                 >
                   <svg

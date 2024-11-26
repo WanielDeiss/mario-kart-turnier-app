@@ -24,4 +24,12 @@ export class TournamentService {
       )
     );
   }
+
+  deleteTournament(id: number) {
+    return lastValueFrom(
+      this.httpClient.delete<TournamentResponse>(
+        API_ROUTES.delete.tournaments(id)
+      )
+    );
+  }
 }

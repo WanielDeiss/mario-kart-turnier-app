@@ -18,4 +18,8 @@ export class TournamentTableComponent {
   openModal() {
     this.modalService.open(AddTournamentForm, { title: 'Add Tournament' });
   }
+
+  deleteTournament(id: number) {
+    this.store.deleteTournament(id);
+  }
 }
