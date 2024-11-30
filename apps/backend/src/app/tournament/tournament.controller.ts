@@ -26,13 +26,19 @@ export class TournamentController {
 
   @Get()
   async getTournaments(): Promise<TournamentModel[]> {
-    return this.tournamentService.tournaments({});
+    const tournaments = await this.tournamentService.tournaments({
+      orderBy: { startDate: 'desc' },
+    });
+    return tournaments.map((tournament) =>
+      this.tournamentService.transformTouramentData(tournament)
+    );
   }
 
   @Get(':id')
   async getTournament(@Param('id') id: string): Promise<TournamentModel> {
-    console.log('id', id);
-    return this.tournamentService.tournament({ id: parseInt(id) });
+    return this.tournamentService.transformTouramentData(
+      await this.tournamentService.tournament({ id: parseInt(id) })
+    );
   }
 
   @Delete(':id')
@@ -47,7 +53,6 @@ export class TournamentController {
         tournamentId: parseInt(id),
       },
     });
-
     return this.participantService.transformDataToList(dbParticipants);
   }
 
@@ -57,6 +62,7 @@ export class TournamentController {
     @Body() postData: { name: string }
   ): Promise<ParticipantModel> {
     const { name } = postData;
+
     return this.participantService.createParticipant({
       name,
       Tournament: { connect: { id: parseInt(id) } },

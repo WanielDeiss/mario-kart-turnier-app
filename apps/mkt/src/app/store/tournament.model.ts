@@ -5,6 +5,7 @@ export interface Tournament {
 
 export interface TournamentResponse extends Tournament {
   id: number;
+  isExpired: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

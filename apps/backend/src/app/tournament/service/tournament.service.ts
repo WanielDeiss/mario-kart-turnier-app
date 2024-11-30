@@ -2,6 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../service/prisma/prisma.service';
 import { Tournament, Prisma } from '@prisma/client';
 
+export interface TournamentResponse extends Tournament {
+  isExpired: boolean;
+}
+
 @Injectable()
 export class TournamentService {
   constructor(private readonly prisma: PrismaService) {}
@@ -56,5 +60,13 @@ export class TournamentService {
     return this.prisma.tournament.delete({
       where,
     });
+  }
+
+  transformTouramentData(tournament: Tournament): TournamentResponse {
+    const isExpired = new Date(tournament.startDate) <= new Date();
+    return {
+      ...tournament,
+      isExpired,
+    };
   }
 }

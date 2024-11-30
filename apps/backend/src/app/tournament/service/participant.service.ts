@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../service/prisma/prisma.service';
 import { Participant, Prisma } from '@prisma/client';
+import { TournamentService } from './tournament.service';
 
 @Injectable()
 export class ParticipantService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly tournamentService: TournamentService
+  ) {}
 
   async participant(
     participantWhereUniqueInput: Prisma.ParticipantWhereUniqueInput
@@ -34,6 +38,14 @@ export class ParticipantService {
   async createParticipant(
     data: Prisma.ParticipantCreateInput
   ): Promise<Participant> {
+    const tournament = this.tournamentService.transformTouramentData(
+      await this.tournamentService.tournament({
+        id: data.Tournament.connect.id,
+      })
+    );
+    if (tournament.isExpired) {
+      throw new Error('Tournament is already started');
+    }
     return this.prisma.participant.create({
       data,
     });
