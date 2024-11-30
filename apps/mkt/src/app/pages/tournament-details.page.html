@@ -25,9 +25,30 @@
       </button>
       }
     </div>
-    <div class="flex justify-between">
-      <div>DESC</div>
-      <div>
+    <div class="flex gap-4">
+      <div class="grow">
+        <div>DESC</div>
+        <div>
+          Round 1
+          <button (click)="createBlocks(participantListStore.participants())">
+            Create Blocks
+          </button>
+
+          @if(blocks.length > 0) {
+          <div class="flex gap-4 justify-center">
+            @for(block of blocks; track block; let index = $index) {
+            <div
+              class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              Block {{index}}
+            </div>
+
+            }
+          </div>
+          }
+        </div>
+      </div>
+      <div class="dark:text-white">
         <span class="font-bold mt-4 inline-block">
           Participants ({{participantListStore.count()}})
         </span>

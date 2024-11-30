@@ -19,6 +19,8 @@ export class TournamentDetailsPage implements OnInit, OnDestroy {
   activatedRouter = inject(ActivatedRoute);
   modalService = inject(ModalService);
 
+  blocks: string[][] = [];
+
   ngOnInit() {
     this.activatedRouter.params.subscribe((params) => {
       this.selectedTournamentStore.get(params['id']);
@@ -45,5 +47,12 @@ export class TournamentDetailsPage implements OnInit, OnDestroy {
       title: 'Register for Tournament',
       data: { tournamentId },
     });
+  }
+
+  createBlocks(participants: string[]) {
+    const blockCount = Math.ceil(participants.length / 4);
+    for (let i = 0; i < blockCount; i++) {
+      this.blocks.push([]);
+    }
   }
 }
