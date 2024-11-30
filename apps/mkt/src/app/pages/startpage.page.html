@@ -16,8 +16,9 @@
         href="#"
         class="grid place-content-center space-y-6 overflow-hidden rounded-lg border"
         [ngClass]="{
-          'border-red-200 bg-red-50 p-6 hover:bg-red-100 dark:border-red-700 dark:bg-red-800 dark:hover:bg-red-700': tournament.isExpired,
-          'border-gray-200 bg-white p-6 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700': !tournament.isExpired,
+          'border-red-200 bg-red-50 p-6 hover:bg-red-100 dark:border-red-700 dark:bg-red-800 dark:hover:bg-red-700': tournament.isExpired && !isToday(tournament.startDate),
+          'border-sky-200 bg-sky-50 p-6 hover:bg-sky-100 dark:border-sky-700 dark:bg-sky-800 dark:hover:bg-sky-700': !tournament.isExpired && isToday(tournament.startDate),
+          'border-gray-200 bg-white p-6 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700': !tournament.isExpired && !isToday(tournament.startDate),
         }"
         [routerLink]="['/tournament', tournament.id]"
       >

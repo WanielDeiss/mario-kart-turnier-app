@@ -11,4 +11,8 @@ import { TournamentStore } from '../store/tournaments.store';
 })
 export class StartpagePage {
   public readonly store = inject(TournamentStore);
+
+  isToday(startDate: Date): boolean {
+    return new Date(startDate).toDateString() === new Date().toDateString();
+  }
 }

@@ -63,7 +63,8 @@ export class TournamentService {
   }
 
   transformTouramentData(tournament: Tournament): TournamentResponse {
-    const isExpired = new Date(tournament.startDate) <= new Date();
+    const isExpired =
+      new Date(tournament.startDate).setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
     return {
       ...tournament,
       isExpired,
