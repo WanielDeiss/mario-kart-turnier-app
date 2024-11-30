@@ -22,4 +22,12 @@ export class TournamentTableComponent {
   deleteTournament(id: number) {
     this.store.deleteTournament(id);
   }
+
+  isInFuture(date: Date) {
+    return new Date(date) > new Date();
+  }
+
+  startTournament(id: number) {
+    this.store.startTournament(id);
+  }
 }

@@ -21,6 +21,7 @@ export class AddTournamentForm {
   form = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     startDate: [''],
+    isStarted: [false],
   });
 
   async submit() {
@@ -28,6 +29,7 @@ export class AddTournamentForm {
       const tournament: Tournament = {
         name: this.form.controls.name.value!,
         startDate: new Date(this.form.controls.startDate.value!),
+        isStarted: Boolean(this.form.controls.isStarted.value),
       };
       await this.store.addTournament(tournament);
       this.modalService.close();

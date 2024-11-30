@@ -46,6 +46,9 @@ export class ParticipantService {
     if (tournament.isExpired) {
       throw new Error('Tournament is already started');
     }
+    if (tournament.isStarted) {
+      throw new Error('Tournament is already started');
+    }
     return this.prisma.participant.create({
       data,
     });
@@ -67,6 +70,14 @@ export class ParticipantService {
   ): Promise<Participant> {
     return this.prisma.participant.delete({
       where,
+    });
+  }
+
+  async deleteAllByTournamentId(tournamentId: number): Promise<void> {
+    await this.prisma.participant.deleteMany({
+      where: {
+        tournamentId,
+      },
     });
   }
 

@@ -17,6 +17,7 @@ model Tournament {
   id           Int           @id @default(autoincrement())
   name         String
   startDate    DateTime      @default("1970-01-01T00:00:00Z")
+  isStarted    Boolean       @default(false)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @default(now()) @updatedAt
   participants Participant[]

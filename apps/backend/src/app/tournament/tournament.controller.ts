@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import {
   Tournament as TournamentModel,
   Participant as ParticipantModel,
@@ -39,6 +47,11 @@ export class TournamentController {
     return this.tournamentService.transformTouramentData(
       await this.tournamentService.tournament({ id: parseInt(id) })
     );
+  }
+
+  @Patch(':id/start')
+  async startTournament(@Param('id') id: string): Promise<TournamentModel> {
+    return this.tournamentService.startTournament({ id: parseInt(id) });
   }
 
   @Delete(':id')

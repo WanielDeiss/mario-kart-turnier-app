@@ -1,9 +1,3 @@
-<div class="dark:text-white">
-  <p>Tournaments: {{ store.tournaments() | json }}</p>
-  <p>Loading: {{ store.isLoading() }}</p>
-  <p>Count: {{ store.count() }}</p>
-</div>
-
 <!-- Start block -->
 <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
   <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -57,6 +51,30 @@
                 {{ tournament.startDate | date }}
               </td>
               <td class="px-4 py-3 flex items-center justify-end">
+                @if (!tournament.isExpired && !isInFuture(tournament.startDate))
+                {
+                <button
+                  type="button"
+                  class="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200"
+                  (click)="startTournament(tournament.id)"
+                >
+                  <svg
+                    class="w-6 h-6 text-gray-800 dark:text-white"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+                }
                 <button
                   type="button"
                   data-modal-target="updateProductModal"

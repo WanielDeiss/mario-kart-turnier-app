@@ -64,6 +64,11 @@ export const TournamentStore = signalStore(
           isLoading: false,
         }));
       },
+      async startTournament(id: number) {
+        store.setLoading();
+        await tournamentService.startTournament(id);
+        store.setCompleted();
+      },
       updateQuery(query: string): void {
         // 👇 Updating state using the `patchState` function.
         patchState(store, (state) => ({ filter: { ...state.filter, query } }));

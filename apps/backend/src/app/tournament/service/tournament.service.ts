@@ -57,14 +57,29 @@ export class TournamentService {
   async deleteTournament(
     where: Prisma.TournamentWhereUniqueInput
   ): Promise<Tournament> {
+    await this.prisma.participant.deleteMany({
+      where: { tournamentId: where.id },
+    });
     return this.prisma.tournament.delete({
       where,
     });
   }
 
+  async startTournament(tournamentId: { id: number }): Promise<Tournament> {
+    return this.prisma.tournament.update({
+      data: {
+        isStarted: true,
+      },
+      where: {
+        id: tournamentId.id,
+      },
+    });
+  }
+
   transformTouramentData(tournament: Tournament): TournamentResponse {
     const isExpired =
-      new Date(tournament.startDate).setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
+      new Date(tournament.startDate).setHours(0, 0, 0, 0) <
+      new Date().setHours(0, 0, 0, 0);
     return {
       ...tournament,
       isExpired,

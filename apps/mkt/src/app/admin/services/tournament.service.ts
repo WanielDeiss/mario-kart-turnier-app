@@ -22,6 +22,15 @@ export class TournamentService {
     );
   }
 
+  startTournament(tournamentId: number) {
+    return lastValueFrom(
+      this.httpClient.patch<TournamentResponse>(
+        API_ROUTES.patch.startTournament(tournamentId),
+        {}
+      )
+    );
+  }
+
   addTournament(tournament: Tournament) {
     return lastValueFrom(
       this.httpClient.post<TournamentResponse>(
