@@ -22,6 +22,20 @@
         Register for tournament
       </button>
     </div>
+    <div class="flex justify-between">
+      <div>DESC</div>
+      <div>
+        <span class="font-bold mt-4 inline-block">
+          Participants ({{participantListStore.count()}})
+        </span>
+        <ul>
+          @for(participant of participantListStore.participants(); track
+          participant) {
+          <li>{{participant}}</li>
+          }
+        </ul>
+      </div>
+    </div>
     }
   </div>
 </section>

@@ -9,6 +9,8 @@ import {
 import { Tournament, TournamentResponse } from './tournament.model';
 import { computed, inject } from '@angular/core';
 import { TournamentService } from '../admin/services/tournament.service';
+import { withLogger } from './features/logger.store-feature';
+import { withLoading } from './features/loading.store-feature';
 
 type TournamentState = {
   tournaments: TournamentResponse[];
@@ -35,6 +37,8 @@ export const TournamentStore = signalStore(
     //   );
     // }),
   })),
+  withLogger('Tournament'),
+  withLoading(),
   withMethods((store) => {
     const tournamentService = inject(TournamentService);
 
@@ -45,12 +49,12 @@ export const TournamentStore = signalStore(
         patchState(store, (state) => ({ tournaments, isLoading: false }));
       },
       async addTournament(tournament: Tournament) {
-        patchState(store, (state) => ({ isLoading: true }));
+        store.setLoading();
         const newTournament = await tournamentService.addTournament(tournament);
         patchState(store, (state) => ({
           tournaments: [...state.tournaments, newTournament],
-          isLoading: false,
         }));
+        store.setCompleted();
       },
       async deleteTournament(id: number) {
         patchState(store, (state) => ({ isLoading: true }));

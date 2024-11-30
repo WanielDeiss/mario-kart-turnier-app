@@ -57,4 +57,21 @@ export class ParticipantService {
       where,
     });
   }
+
+  transformDataToList(participants: Participant[]): {
+    participants: string[];
+    tournamentId: number;
+  } {
+    const resParticipants = [];
+    let tournamentId: number;
+
+    participants.forEach((participant, index) => {
+      resParticipants.push(participant.name);
+      if (tournamentId === undefined) tournamentId = participant.tournamentId;
+      if (index < 1 && tournamentId !== participant.tournamentId)
+        console.error('eeeh, the id is wrong');
+    });
+
+    return { tournamentId, participants: resParticipants };
+  }
 }

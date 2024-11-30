@@ -1,10 +1,17 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { Tournament as TournamentModel } from '@prisma/client';
+import {
+  Tournament as TournamentModel,
+  Participant as ParticipantModel,
+} from '@prisma/client';
 import { TournamentService } from './service/tournament.service';
+import { ParticipantService } from './service/participant.service';
 
 @Controller('tournament')
 export class TournamentController {
-  constructor(private readonly tournamentService: TournamentService) {}
+  constructor(
+    private readonly tournamentService: TournamentService,
+    private readonly participantService: ParticipantService
+  ) {}
 
   @Post()
   async createTournament(
@@ -33,12 +40,26 @@ export class TournamentController {
     return this.tournamentService.deleteTournament({ id: parseInt(id) });
   }
 
+  @Get(':id/participant')
+  async getAllParticipantsFromTournament(@Param('id') id: string) {
+    const dbParticipants = await this.participantService.participants({
+      where: {
+        tournamentId: parseInt(id),
+      },
+    });
+
+    return this.participantService.transformDataToList(dbParticipants);
+  }
+
   @Post(':id/participant')
   async addParticipant(
     @Param('id') id: string,
     @Body() postData: { name: string }
-  ): Promise<TournamentModel> {
+  ): Promise<ParticipantModel> {
     const { name } = postData;
-    return; // todo add participant to tournament
+    return this.participantService.createParticipant({
+      name,
+      Tournament: { connect: { id: parseInt(id) } },
+    });
   }
 }

@@ -1,4 +1,10 @@
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withHooks,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { TournamentResponse } from './tournament.model';
 import { inject } from '@angular/core';
 import { TournamentService } from '../admin/services/tournament.service';
@@ -28,6 +34,16 @@ export const SelectedTournamentStore = signalStore(
           isLoading: false,
         }));
       },
+      clear() {
+        patchState(store, initialState);
+        console.log('Cleared SelectedTournamentStore');
+      },
     };
+  }),
+  withHooks({
+    onDestroy({ clear }) {
+      console.log('Destroying SelectedTournamentStore');
+      clear();
+    },
   })
 );
