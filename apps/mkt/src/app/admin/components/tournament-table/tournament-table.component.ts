@@ -30,4 +30,8 @@ export class TournamentTableComponent {
   startTournament(id: number) {
     this.store.startTournament(id);
   }
+
+  pauseTournament(id: number) {
+    this.store.pauseTournament(id);
+  }
 }

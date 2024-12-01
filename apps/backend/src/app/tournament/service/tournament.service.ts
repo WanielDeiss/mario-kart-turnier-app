@@ -76,6 +76,17 @@ export class TournamentService {
     });
   }
 
+  async pauseTournament(tournamentId: { id: number }): Promise<Tournament> {
+    return this.prisma.tournament.update({
+      data: {
+        isStarted: false,
+      },
+      where: {
+        id: tournamentId.id,
+      },
+    });
+  }
+
   transformTouramentData(tournament: Tournament): TournamentResponse {
     const isExpired =
       new Date(tournament.startDate).setHours(0, 0, 0, 0) <

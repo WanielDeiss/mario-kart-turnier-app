@@ -10,6 +10,7 @@ export default {
   },
   patch: {
     startTournament: (id: number) => `${API_BASE}/tournament/${id}/start`,
+    pauseTournament: (id: number) => `${API_BASE}/tournament/${id}/pause`,
   },
   delete: {
     tournaments: (id: number) => `${API_BASE}/tournament/${id}`,

@@ -67,6 +67,21 @@ export const TournamentStore = signalStore(
       async startTournament(id: number) {
         store.setLoading();
         await tournamentService.startTournament(id);
+        patchState(store, (state) => ({
+          tournaments: state.tournaments.map((t) =>
+            t.id === id ? { ...t, isStarted: true } : t
+          ),
+        }));
+        store.setCompleted();
+      },
+      async pauseTournament(id: number) {
+        store.setLoading();
+        await tournamentService.pauseTournament(id);
+        patchState(store, (state) => ({
+          tournaments: state.tournaments.map((t) =>
+            t.id === id ? { ...t, isStarted: false } : t
+          ),
+        }));
         store.setCompleted();
       },
       updateQuery(query: string): void {

@@ -54,6 +54,11 @@ export class TournamentController {
     return this.tournamentService.startTournament({ id: parseInt(id) });
   }
 
+  @Patch(':id/pause')
+  async pauseTournament(@Param('id') id: string): Promise<TournamentModel> {
+    return this.tournamentService.pauseTournament({ id: parseInt(id) });
+  }
+
   @Delete(':id')
   async deleteTournament(@Param('id') id: string): Promise<TournamentModel> {
     return this.tournamentService.deleteTournament({ id: parseInt(id) });
