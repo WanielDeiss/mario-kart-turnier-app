@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { TournamentStore } from '../../../store/tournaments.store';
 import { ModalService } from '../../../services/modal.service';
 import { AddTournamentForm } from '../../forms/add-tournament.form';
+import { IconComponent } from '../../../components/icon.component';
 
 @Component({
   selector: 'app-tournament-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, IconComponent],
   templateUrl: './tournament-table.component.html',
 })
 export class TournamentTableComponent {

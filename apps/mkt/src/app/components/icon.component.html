@@ -1,0 +1,8 @@
+<svg
+  class="w-6 h-6 text-gray-800 dark:text-white"
+  aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  [attr.fill]="currentIcon().fill"
+  [attr.viewBox]="currentIcon().viewBox"
+  [innerHTML]="sanitizer.bypassSecurityTrustHtml(currentIcon().path)"
+></svg>
